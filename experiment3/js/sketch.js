@@ -5,9 +5,19 @@
 //mouse-gnereated ripple logic created almost entirely from ChatGPT
 let ripples = [];
 let speed = 0; 
+let canvasContainer;
 
+// setup() function is called once when the program starts
 function setup() {
-  createCanvas(600, 600);
+    // place our canvas, making it fit our container
+    canvasContainer = $("#canvas-container");
+    let canvas = createCanvas(canvasContainer.width(), canvasContainer.height(), WEBGL);
+    canvas.parent("canvas-container");
+    // resize canvas is the page is resized
+    $(window).resize(function() {
+        console.log("Resizing...");
+        resizeCanvas(canvasContainer.width(), canvasContainer.height());
+    });
 }
 
 function draw() {
