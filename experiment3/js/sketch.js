@@ -11,7 +11,7 @@ let canvasContainer;
 function setup() {
     // place our canvas, making it fit our container
     canvasContainer = $("#canvas-container");
-    let canvas = createCanvas(canvasContainer.width(), canvasContainer.height(), WEBGL);
+    let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
     canvas.parent("canvas-container");
     // resize canvas is the page is resized
     $(window).resize(function() {

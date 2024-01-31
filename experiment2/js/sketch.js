@@ -57,7 +57,3 @@ function genBox(x, y) {
     return color('hsb(' + hue + ', 80%, 100%)');
   }
 
-// mousePressed() function is called once after every time a mouse button is pressed
-// function mousePressed() {
-//     code to run when mouse is pressed
-// }
