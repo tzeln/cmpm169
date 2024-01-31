@@ -1,67 +1,69 @@
 // sketch.js - purpose and description here
-// Author: Your Name
-// Date:
+// Author: Nick Tung
+// Date: 1/29/24
 
-// Here is how you might set up an OOP p5.js project
-// Note that p5.js looks for a file called sketch.js
+//mouse-gnereated ripple logic created almost entirely from ChatGPT
+let ripples = [];
+let speed = 0; 
 
-// Constants - User-servicable parts
-// In a longer project I like to put these in a separate file
-const VALUE1 = 1;
-const VALUE2 = 2;
-
-// Globals
-let myInstance;
-let canvasContainer;
-
-class MyClass {
-    constructor(param1, param2) {
-        this.property1 = param1;
-        this.property2 = param2;
-    }
-
-    myMethod() {
-        // code to run when method is called
-    }
-}
-
-// setup() function is called once when the program starts
 function setup() {
-    // place our canvas, making it fit our container
-    canvasContainer = $("#canvas-container");
-    let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
-    canvas.parent("canvas-container");
-    // resize canvas is the page is resized
-    $(window).resize(function() {
-        console.log("Resizing...");
-        resizeCanvas(canvasContainer.width(), canvasContainer.height());
-    });
-    // create an instance of the class
-    myInstance = new MyClass(VALUE1, VALUE2);
-
-    var centerHorz = windowWidth / 2;
-    var centerVert = windowHeight / 2;
+  createCanvas(600, 600);
 }
 
-// draw() function is called repeatedly, it's the main animation loop
 function draw() {
-    background(220);    
-    // call a method on the instance
-    myInstance.myMethod();
+  background(255);
+  // background(30, 70, 105);
 
-    // Put drawings here
-    var centerHorz = canvasContainer.width() / 2 - 125;
-    var centerVert = canvasContainer.height() / 2 - 125;
-    fill(234, 31, 81);
-    noStroke();
-    rect(centerHorz, centerVert, 250, 250);
-    fill(255);
-    textStyle(BOLD);
-    textSize(140);
-    text("p5*", centerHorz + 10, centerVert + 200);
+  if (mouseIsPressed) {
+    let mouseRipple = new Ripple(mouseX, mouseY);
+    mouseRipple.alpha = 0; 
+    ripples.push(mouseRipple);
+  }
+  
+  let x = 300 + sin(speed)*100;
+  let y = 300 + cos(speed)*100;
+  let genRipple = new Ripple(x, y);
+  ripples.push(genRipple);
+    
+
+  
+  speed += 1;
+  let g = 50;
+  for (let i = ripples.length - 1; i >= 0; i--) {
+    ripples[i].update();
+    ripples[i].display(g);
+    if (ripples[i].isFinished()) {
+      ripples.splice(i, 1); 
+      ripples.splice(i, 2);
+      let newRipple = new Ripple(random(width), random(height));
+      ripples.push(newRipple);
+    }
+    g += 5;
+  }
 }
 
-// mousePressed() function is called once after every time a mouse button is pressed
-function mousePressed() {
-    // code to run when mouse is pressed
+class Ripple {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.radius = 0;
+    this.maxRadius = 200; 
+    this.expandRate = 3; 
+    this.alpha = 255; 
+  }
+  
+  update() {
+    this.radius += this.expandRate;
+    this.alpha -= 5;
+  }
+  
+  display(x) {
+    noFill();
+    stroke(30, x, 160, this.alpha);
+    ellipse(this.x, this.y, this.radius * 2);
+  }
+  
+  isFinished() {
+    return this.radius >= this.maxRadius || this.alpha <= 0;
+  }
 }
