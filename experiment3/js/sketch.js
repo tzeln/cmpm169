@@ -1,4 +1,6 @@
-// sketch.js - purpose and description here
+// sketch.js - This piece uses ripples to generate a pattern amongst a chaos of other ripples – mouse-input makes the pattern fade.
+// There may be a name for this pattern, but I am not well-educated enough to know it.
+
 // Author: Nick Tung
 // Date: 1/29/24
 
@@ -30,8 +32,8 @@ function draw() {
     ripples.push(mouseRipple);
   }
   
-  let x = 300 + sin(speed)*100;
-  let y = 300 + cos(speed)*100;
+  let x = canvasContainer.width()/2 + sin(speed)*100;
+  let y = canvasContainer.height()/2 + cos(speed)*100;
   let genRipple = new Ripple(x, y);
   ripples.push(genRipple);
     
