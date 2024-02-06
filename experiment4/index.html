@@ -17,6 +17,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 	<!-- Load p5.js library -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+	<script src="p5.sound.js"></script>
 
 	<!-- Link to javascript files - DEFER waits until all elements are rendered -->
 	<!-- Use me for a JavaScript OOP Project -->
@@ -31,7 +32,7 @@
 			<h1>Experiment 4 - Images, Video, & Sound Art</h1>
 			<div class="minor-section">
 				<h2>Imitate</h2>
-				<p>For this experiment, I wanted to imitate some image alteration techniques seen on the Generative Design website. I’m a big fan of this celebrity cat named uni, and I want to do some interesting gradient or pattern effects on him This unfortunately is more than a little laggy for even my PC, so I attempted some ways to minimize this. </p>
+				<p>For this experiment, I wanted to imitate some image alteration techniques seen on the Generative Design website. I’m a big fan of this celebrity cat named uni, and I want to do some interesting gradient or pattern effects on him. My initial idea was to take an image from him and replace squares within the image with ‘:3’ that become more saturated based on the intensity of the value within each square. This was relatively simple, just a nested for-loop and some gradient/map functions (gradient function was learned through ChatGPT) that could approximate the value within a given square. Unfortunately, it’s a little laggy even for my PC, so I attempted some ways to minimize this. Overall, though, a solid result. </p>
 			</div>
 
 			<div class="minor-section">
@@ -42,12 +43,14 @@
 
 			<div class="minor-section">
 				<h2>Innovate</h2>
-				
+				<p>This sort of pixelation effect is what I was looking for, but now I’m aiming to achieve some sort of user-action that will allow the user to interact with the piece in some way. Unfortunately, this has taken me through quite the loop! I’ve tried setting different bounds for mouse integration as well as sound integration, but neither seem to work remotely well. I have a suspicion that the reason mouse or sound is seemingly working with the piece is because of how the draw loop works, but I don’t know for sure and I’ve been running in circles.
+				I’ve attempted to take the function out of the draw loop and into its own function so that it can be called outside of draw to solve the computational overhead of it running forever. While this makes scrolling up and down the page much easier, the sound I imported (a simple royalty-free cat meow) still isn’t playing when I press the mouse.
+				Unfortunately, I spent a good amount of time figuring this out when all I had to do was include the p5.sound library. But once this was done, I successfully inserted a meow sound that plays whenever the user clicks the canvas. Pretty cool!</p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Reflection</h2>
-				
+				<p>This experiment was significantly easier in the beginning than it was in the end. Creating a simple grid of :3 to represent an image wasn’t as hard once I found the grayscale function I needed (whether that be from ChatGPT or Generative Design). Afterwards, I was a little stuck on where to go because I had already reached my end goal. I had some other ideas, but I couldn’t realistically think of ways to achieve them in the given time (“pet” uni and have the :3 warp where you’re petting, have the sound only played when you make a pet motion with the mouse, increase the overall thickness of :3 depending on the mouseX position). I attempted some of these ideas but it was far out of my capabilities in terms of scope. Ultimately, though, I’m happy with the result I’ve made so far. I hope you like it!</p>
 				</ul>
 			</div>
 

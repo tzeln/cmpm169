@@ -4,6 +4,7 @@
 
 let img;
 let sound;
+let frame;
 let canvasContainer;
 
 function preload() {
@@ -19,30 +20,29 @@ function setup() {
     // resize canvas is the page is resized
     $(window).resize(function() {
         console.log("Resizing...");
-        resizeCanvas(img.width(), img.height());
+        resizeCanvas(img.width, img.height);
     });
-    image(img, 0, 0);
-}
+    canvas.mousePressed(canvasPressed);
+    saveFrame();
+
+}   
   
-function draw() {
-    background(255);
-    noStroke();
+function canvasPressed() {
+    sound.setVolume(.5);
+    sound.play();
+  }
+
+function saveFrame() {
+    frame = createGraphics(img.width, img.height);
+    frame.background(255);
+    frame.noStroke();
     for (let y = 0; y < img.height; y += 5) { 
         for (let x = 0; x < img.width; x += 5) { 
             let pixel = img.get(x, y);
             let greyscale = round(red(pixel) * 0.222 + green(pixel) * 0.707 + blue(pixel) * 0.071);
             let thickness = map(greyscale, 0, 255, 20, 1); 
             textSize(thickness);
-            if (thickness < 10) {
-                text(':>', x, y);
-            } else {
-                text(':3', x, y);
-            }
+            text(':3', x, y);
         }    
     }
-    frameRate(60);
-}
-
-function mousePressed() {
-    sound.play();
 }
